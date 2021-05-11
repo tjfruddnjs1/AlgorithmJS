@@ -52,8 +52,6 @@ function solution(nums) {
 
     let answer = combinations.length;
 
-    console.log(combinations);
-
     //소수인지 판별
     for(let i in combinations){
         let bigNum = parseInt(combinations[i]/2);
@@ -66,9 +64,6 @@ function solution(nums) {
             bigNum--;
         }
     }
-
-    //모든 조합이 소수인지 판별 > result
-    
     return answer;
 }
 
