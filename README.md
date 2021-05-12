@@ -10,9 +10,15 @@
 ## VS Code 단축키
 - ctrl + shift + L : 변경하려는 단어 선택후 사용시 선택 단어와 같은 단어 모두 선택
 
+## 발생 에러
+> TypeError: Cannot read property '0' of undefined
+- 호출하는 곳에 값이 들어가지 않은 경우 => undefined
+
 ## 알게된 함수
+> **배열** 함수
+
 1. reduce((acc, cur, idx) => //처리 내용 , //초기값)
-- 빈 요소를 제외하고 배열 내의 존재하는 각 요소에 대해 callback 함수를 한 번씩 실행하는 함수
+- 빈 요소를 제외하고 **배열** 내의 존재하는 각 요소에 대해 callback 함수를 한 번씩 실행하는 함수
 - **accumlator** : 콜백의 반환값을 누적 , 콜백의 이전 반환값을 저장
 - **currentValue** : 처리할 현재 요소
 - **currentIndex** : 처리할 현재 요소의 인덱스
@@ -25,7 +31,13 @@
 - splice(start, deleteCount) : **배열**의 start인덱스부터 deleteCount갯수의 요소를 삭제
 - **배열의 기존 요소를 변경**
 
-3. subString
+3. push, pop
+- push(element) : **배열** 의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환
+- pop() : **배열**에서 마지막 요소를 제거하고 그 요소를 반환
+
+> **문자열** 함수
+
+1. subString
 - subString(start, end) : **문자열**의 start 인덱스부터 end인덱스(포함O)까지를 반환
 
 ## 정규 표현식
@@ -186,3 +198,67 @@ for(let i in equal_string){
 ```
 
 **출처** : https://programmers.co.kr/learn/courses/30/lessons/60057
+
+> `2021-05-12`
+
+- programmers > 코딩 테스트 연습 > 크레인 인형뽑기 게임 (2019 카카오 개발자 겨울 인턴십)
+
+> 내가 생각한 풀이
+
+- 변수 지정 및 초기 알고리즘 주석 설명
+```js
+    
+    let answer = 0;
+    // 결과 바구니 역할
+    let answer_slot = [];
+    // 2차원 배열의 y역할을 하는 인덱스
+    let board_y_index = 0;
+    // 2차원 배열의 x역할을 하는 인덱스
+    let board_x_index = 0;
+
+    //1. moves 입력 배열을 갯수만큼 반복문을 순회
+
+    //2-1. 조건 1. 만약 x열에 인형이 없는 경우
+    //2-2. 조건 2. 인형이 있으면서 이전 바구니에 같은 종류의 인형이 있는 경우와 없는 경우
+```
+
+1. moves 입력 배열 갯수 만큼 반복문 순회
+```js
+for(element in moves){
+        board_y_index = moves[element] - 1;
+    }
+```
+- y열의 인덱스는 moves 배열의 하나 적은 수로 초기화
+
+2. 만약 x열에 인형이 있는 경우와 없는 경우
+
+2-1. x열에 인형이 없는 경우
+```js
+    if(board_x_index >= board.length) {
+        board_x_index = 0;
+        break;
+    }
+```
+- 입력 2차원 배열의 행, 열의 크기보다 열이 커질 경우 break
+
+2-2. x열에 인형이 있는 경우
+```js
+if(board[board_x_index][board_y_index] == 0){
+    board_x_index++;
+    }else{
+        if(answer_slot[answer_slot.length-1] == board [board_x_index][board_y_index]){
+            answer_slot.pop();
+            answer+=2; 
+        }else{
+            answer_slot.push(board[board_x_index][board_y_index]);
+        }
+                
+        board[board_x_index][board_y_index] = 0;
+        board_x_index = 0;
+        break;
+}
+```
+- 뽑을 인형이 있으면서 바구니 이전 인덱스에 만약 같은 인형이 들어가있다면 삭제하면서 answer+=2 
+- 이전 인덱스에 같은 인형이 없다고하면 바구니에 해당 원소 추가
+
+**출처** : https://programmers.co.kr/learn/courses/30/lessons/64061
