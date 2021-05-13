@@ -33,6 +33,8 @@ function solution(board, moves){
         }
     }
 
+    console.log(answer_slot);
+
     return answer;
 }
 
