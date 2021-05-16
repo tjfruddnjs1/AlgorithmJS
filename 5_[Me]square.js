@@ -1,12 +1,10 @@
-let w = 171717178;
-let h = 123532132;
+let w = 100000000;
+let h = 4;
 
 function solution(w, h) {
     let sum = 0;
     let temp = 0;
     let side = h/w;
-
-    console.log(w/h);
 
     for (let i = 0; i < w; i++) {
         temp = side * i;
@@ -17,3 +15,6 @@ function solution(w, h) {
 }
 
 console.log(solution(w,h));
+console.log(solution(h,w));
+
+console.log(1/99);
