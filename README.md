@@ -262,3 +262,48 @@ if(board[board_x_index][board_y_index] == 0){
 - 이전 인덱스에 같은 인형이 없다고하면 바구니에 해당 원소 추가
 
 **출처** : https://programmers.co.kr/learn/courses/30/lessons/64061
+
+> `2021-05-21`
+
+- programmers > 오픈 채팅방 > 2019 KAKAO BLIND RECRUITMENT
+
+> 내가 생각한 풀이
+
+- 처음에는 memberList를 저장하는 배열과 result 출력문을 나타낼 answer 배열 2개를 사용해서 반복문 2개를 통해 결과를 출력하려 했다
+- 하지만 O(N^2) 이기 때문에 시간 초과되는 문제가 생겨 memberList 배열을 Map 타입을 통해 바꿔 문제를 해결하였다
+
+```js
+function solution(record) {
+    let answer = [];
+    let memberList = new Map();
+
+    for(let index in record){
+
+        let order = record[index].split(' ')[0];
+        let memberId = record[index].split(' ')[1];
+        let memberNickname = record[index].split(' ')[2];
+
+        switch(order){
+            case 'Enter' :
+                memberList.set(memberId, memberNickname);
+                answer.push(memberId+"님이 들어왔습니다.");
+                break;
+            case 'Leave' :
+                answer.push(memberId+"님이 나갔습니다.");
+                break;
+            case 'Change' :
+                memberList.set(memberId, memberNickname);
+                break;
+        }
+    }
+
+    for(let answerIndex in answer){
+        let userId = answer[answerIndex].split('님')[0];
+        answer[answerIndex] = answer[answerIndex].replace(userId, memberList.get(userId));
+    }
+
+    return answer;
+}
+```
+
+출처 : https://programmers.co.kr/learn/courses/30/lessons/42888

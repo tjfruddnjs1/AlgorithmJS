@@ -14,6 +14,7 @@ function huffman(input){
         }
     }
 
+
     console.log(charCountArray);
 
     // 트리 구조를 문자열로 표현하기 위한 통합 배열 
