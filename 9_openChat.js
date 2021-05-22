@@ -6,25 +6,23 @@ function solution(record) {
 
     for(let index in record){
 
-        let order = record[index].split(' ')[0];
-        let memberId = record[index].split(' ')[1];
-        let memberNickname = record[index].split(' ')[2];
+        let splitRecord = record[index].split(' ');
 
-        switch(order){
+        switch(splitRecord[0]){
             case 'Enter' :
-                memberList.set(memberId, memberNickname);
-                answer.push(memberId+"님이 들어왔습니다.");
-
+                memberList.set(splitRecord[1], splitRecord[2]);
+                answer.push(splitRecord[1]+"님이 들어왔습니다.");
                 break;
             case 'Leave' :
-                answer.push(memberId+"님이 나갔습니다.");
+                answer.push(splitRecord[1]+"님이 나갔습니다.");
                 break;
             case 'Change' :
-                memberList.set(memberId, memberNickname);
+                memberList.set(splitRecord[1], splitRecord[2]);
                 break;
         }
     }
 
+    console.log(answer);
 
     for(let answerIndex in answer){
         let userId = answer[answerIndex].split('님')[0];

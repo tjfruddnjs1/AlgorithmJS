@@ -307,3 +307,19 @@ function solution(record) {
 ```
 
 출처 : https://programmers.co.kr/learn/courses/30/lessons/42888
+
+> `2021-05-22`
+
+- programmers > 메뉴 리뉴얼 > 2021 KAKAO BLIND RECRUITMENT
+
+> 내가 생각한 풀이
+
+1. input으로 들어오는 orders를 문자 하나씩 자른다 (split(''))
+2. combination 함수를 사용해서 combinationOrder 배열에 가능한 조합 저장
+3. ',' 기준으로 잘라 combinationOrder를 word에 저장 후,
+4. stringSort : 문자열을 잘라 배열로 만들어 다시 문자열로 바꾸는 함수
+5. map 타입에 key가 없다면 value를 0으로 있다면 원래 값 +1 하여 저장
+6. 2번 이상 나오는 메뉴 중 최대 값이 중복인 것을 찾아 answer에 저장
+7. answer를 문자 기준으로 정렬 후 출력
+
+출처 : https://programmers.co.kr/learn/courses/30/lessons/72411
