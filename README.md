@@ -40,6 +40,9 @@
 1. subString
 - subString(start, end) : **문자열**의 start 인덱스부터 end인덱스(포함O)까지를 반환
 
+2. substr
+- substr(start, charCount) : **문자열**의 start 인덱스부터 charCount 갯수만큼을 잘라 문자열을 반환
+
 ## 정규 표현식
 
 > /regex?/flag
@@ -323,3 +326,45 @@ function solution(record) {
 7. answer를 문자 기준으로 정렬 후 출력
 
 출처 : https://programmers.co.kr/learn/courses/30/lessons/72411
+
+> `2021-05-23`
+
+- programmers > 뉴스 클러스터링 > 2018 KAKAO BLIND RECRUITMENT
+
+> 문제를 푼 사람들 중 가장 우수한 풀이
+
+- 먼저 풀어보다가 반례(교집합이 중복)의 경우를 생각하지 못하여 해당 풀이를 보게 되었습니다
+
+```js
+function solution (str1, str2) {
+
+  function explode(text) {
+    const result = [];
+    for (let i = 0; i < text.length - 1; i++) {
+      const node = text.substr(i, 2);
+      if (node.match(/[A-Za-z]{2}/)) {
+        result.push(node.toLowerCase());
+      }
+    }
+    return result;
+  }
+
+  const arr1 = explode(str1);
+  const arr2 = explode(str2);
+  const set = new Set([...arr1, ...arr2]);
+  let union = 0;
+  let intersection = 0;
+
+  set.forEach(item => {
+    const has1 = arr1.filter(x => x === item).length;
+    const has2 = arr2.filter(x => x === item).length;
+    union += Math.max(has1, has2);
+    intersection += Math.min(has1, has2);
+  })
+  return union === 0 ? 65536 : Math.floor(intersection / union * 65536);
+}
+```
+
+- 기존의 교집합과는 이 문제에서 요구하는 다른 점이 있는데 교집합의 경우와 합집합의 경우가 기존의 교집합과 합집합과는 다른데, 처리하는데 있어 고민을 하다가 포기를 했습니다
+- 좋은 예시의 코드를 보면 'set 타입 : 중복 저장 불가' 를 통해 최대, 최소를 합집합, 교집합으로 나타내어 해결하였습니다.
+- 'set 타입'을 생각하지도 못했을 뿐더러 방법 자체가 되게 신박하다고 생각했고 교집합, 합집합의 경우 어떠한 형태로 나올지 모르는 것이라 다양한 방법으로의 응용이 가능할 수 있도록 가능성을 열어둬야 한다고 생각했습니다.
